@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>微信步数修改</title>
+  <style>
+    body { font-family: sans-serif; padding: 30px; max-width: 500px; margin: auto; }
+    input, button { display: block; margin-top: 10px; width: 100%; padding: 10px; }
+    #message { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>微信步数修改工具</h2>
+  <input type="text" id="account" placeholder="微信账号（手机号）">
+  <input type="password" id="password" placeholder="密码">
+  <input type="number" id="steps" placeholder="步数（如：10000）">
+  <button onclick="updateSteps()">提交</button>
+  <div id="message"></div>
+
+  <script>
+    async function updateSteps() {
+      const account = document.getElementById('account').value;
+      const password = document.getElementById('password').value;
+      const steps = document.getElementById('steps').value;
+      const message = document.getElementById('message');
+
+      if (!account || !password || !steps) {
+        message.textContent = '请填写所有字段';
+        return;
+      }
+
+      const url = `https://steps.api.030101.xyz/api?account=${encodeURIComponent(account)}&password=${encodeURIComponent(password)}&steps=${encodeURIComponent(steps)}`;
+
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          const text = await res.text();
+          message.textContent = '设置成功：' + text;
+        } else {
+          message.textContent = '请求失败，状态码：' + res.status;
+        }
+      } catch (err) {
+        message.textContent = '请求错误：' + err;
+      }
+    }
+  </script>
+</body>
+</html>
