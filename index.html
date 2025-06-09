@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>微信步数修改-BigJackson制作</title>
   <style>
     :root {
@@ -22,6 +23,7 @@
       min-height: 100vh;
       box-sizing: border-box;
       color: var(--text-color);
+      position: relative;
     }
     
     h2 {
@@ -94,6 +96,25 @@
       color: var(--error-color);
     }
     
+    .github-link {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      font-size: 14px;
+      color: var(--primary-color);
+      text-decoration: none;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .github-link:hover {
+      background-color: white;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+    
     /* 响应式设计 */
     @media (max-width: 480px) {
       body {
@@ -102,6 +123,35 @@
       
       h2 {
         font-size: 20px;
+        margin-bottom: 20px;
+      }
+      
+      input, button {
+        padding: 12px 14px;
+        font-size: 15px;
+      }
+      
+      .github-link {
+        font-size: 13px;
+        padding: 6px 10px;
+        bottom: 10px;
+        right: 10px;
+      }
+      
+      #message {
+        margin-top: 15px;
+        padding: 10px;
+        font-size: 13px;
+      }
+    }
+    
+    @media (max-width: 350px) {
+      body {
+        padding: 12px;
+      }
+      
+      h2 {
+        font-size: 18px;
       }
       
       input, button {
@@ -112,12 +162,13 @@
 </head>
 <body>
   <h2>微信步数修改工具</h2>
-  <p>本工具在github进行了开源</p><a href="https://github.com/tud8951/WeChat-step">Github开源库</a>
   <input type="text" id="account" placeholder="请输入zepp life账号">
   <input type="password" id="password" placeholder="请输入密码">
   <input type="number" id="steps" placeholder="请输入目标步数">
   <button onclick="updateSteps()">提交修改</button>
   <div id="message"></div>
+  
+  <a href="https://github.com/tud8951/WeChat-step" class="github-link" target="_blank">Github开源库</a>
 
   <script>
     async function updateSteps() {
